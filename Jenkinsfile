@@ -14,7 +14,7 @@ pipeline {
             stage('Unit Tests') {
             steps {
                     script {
-                        sh 'npm install registry.npmjs.org --verbose'
+                        sh 'npm install --verbose'
                         sh 'npm test -- --watchAll=false'
                     }
             }
