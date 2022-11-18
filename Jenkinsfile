@@ -1,7 +1,7 @@
 
 pipeline {
     environment {
-        registry = 'iamstarcode/dockerized-react:latest'
+        registry = 'iamstarcode/dockerized-react'
         registryCredential = 'dockerhub'
         dockerImage = ''
     }
