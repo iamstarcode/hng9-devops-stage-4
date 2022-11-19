@@ -29,10 +29,15 @@ pipeline {
             }
 
             stage('Deploying Docker Image to Dockerhub') {
-                withDockerRegistry([ credentialsId: 'dockerhub', url: '' ]) {
-                    dockerImage.push()
+                steps {
+                    script {
+                        docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                        }
+                    }
                 }
             }
+
             stage('Cleaning Up') {
                 steps {
                 sh "docker rmi --force $registry:$BUILD_NUMBER"
