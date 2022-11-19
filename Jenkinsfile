@@ -38,15 +38,11 @@ pipeline {
                 }
             }
 
-            stage('Cleaning Up') {
-                steps {
-                sh "docker rmi --force $registry:$BUILD_NUMBER"
-                }
-            }
-
         stage('Deploying') {
                 steps {
-                sh 'docker run --name mynginx3 -p 80:80 -d iamstarcode/dockerized-react:latest'
+                sh 'docker stop  app || true'
+                sh 'docker rm -f app || true'
+                sh 'docker run --name app -p 80:80 -d iamstarcode/dockerized-react:latest'
                 }
         }
     }
