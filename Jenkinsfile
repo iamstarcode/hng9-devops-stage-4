@@ -23,7 +23,7 @@ pipeline {
             stage('Building Docker Image') {
                 steps {
                     script {
-                        dockerImage = docker.build registry + ":${env.BUILD_ID}"
+                        dockerImage = docker.build registry + ':latest'
                     }
                 }
             }
@@ -31,7 +31,7 @@ pipeline {
             stage('Deploying Docker Image to Dockerhub') {
                 steps {
                     script {
-                        docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                        docker.withRegistry('', registryCredential) {
                         dockerImage.push()
                         }
                     }
