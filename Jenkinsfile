@@ -31,7 +31,7 @@ pipeline {
             stage('Deploying Docker Image to Dockerhub') {
                 steps {
                     script {
-                        docker.withRegistry('', registryCredential) {
+                        docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
                         dockerImage.push()
                         }
                     }
@@ -43,5 +43,11 @@ pipeline {
                 sh "docker rmi --force $registry:$BUILD_NUMBER"
                 }
             }
+
+        stage('Deploying') {
+                steps {
+                sh 'docker run --name mynginx3 -p 80:80 -d iamstarcode/dockerized-react:latest'
+                }
+        }
     }
 }
