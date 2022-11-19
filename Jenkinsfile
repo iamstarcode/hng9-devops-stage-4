@@ -29,10 +29,8 @@ pipeline {
             }
 
             stage('Deploying Docker Image to Dockerhub') {
-                steps {
                 withDockerRegistry([ credentialsId: 'dockerhub', url: '' ]) {
                     dockerImage.push()
-                }
                 }
             }
 
